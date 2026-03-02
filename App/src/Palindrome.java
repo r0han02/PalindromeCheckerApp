@@ -1,32 +1,28 @@
-import java.util.Stack;
 public class Palindrome {
     public static void main(String[] args) {
-        Palindrome checker = new Palindrome();
-        String input = "Madam In Eden Im Adam";
-        boolean result = checker.checkPalindrome(input);
-        System.out.println("Input text: " + input);
-        System.out.println("Is it a Palindrome? : " + result);
+        String input = "level";
+        PalindromeStrategy strategy = new StackStrategy();
+        boolean result = strategy.check(input);
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + result);
     }
-    public boolean checkPalindrome(String input) {
+}
+interface PalindromeStrategy {
 
-        if (input == null) {
-            return false;
+    boolean check(String input);
+}
+class StackStrategy implements PalindromeStrategy {
+    public boolean check(String input) {
+        java.util.Stack<Character> stack = new java.util.Stack<>();
+        for (char c : input.toCharArray()) {
+            stack.push(c);
         }
-        String normalized = input
-                .toLowerCase()
-                .replaceAll("[^a-z0-9]", "");
-        return isPalindromeUsingStack(normalized);
-    }
-    private boolean isPalindromeUsingStack(String input) {
-        Stack<Character> stack = new Stack<>();
-        for (int i = 0; i < input.length(); i++) {
-            stack.push(input.charAt(i));
-        }
-        for (int i = 0; i < input.length(); i++) {
-            if (input.charAt(i) != stack.pop()) {
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
                 return false;
             }
         }
+
         return true;
     }
 }
