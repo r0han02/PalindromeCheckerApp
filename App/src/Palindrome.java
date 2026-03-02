@@ -1,5 +1,5 @@
 public class Palindrome {
-    public static void main(String[] args) {
+    static void main() {
         String input = "madam";
         char[] characters = input.toCharArray();
         int start = 0;
