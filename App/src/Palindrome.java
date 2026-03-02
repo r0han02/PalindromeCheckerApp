@@ -1,17 +1,18 @@
+import java.util.Stack;
 public class Palindrome {
     static void main() {
         String input = "madam";
-        char[] characters = input.toCharArray();
-        int start = 0;
-        int end = characters.length - 1;
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));
+        }
         boolean isPalindrome = true;
-        while (start < end) {
-            if (characters[start] != characters[end]) {
+        for (int i = 0; i < input.length(); i++) {
+            char poppedChar = stack.pop();
+            if (input.charAt(i) != poppedChar) {
                 isPalindrome = false;
                 break;
             }
-            start++;
-            end--;
         }
         System.out.println("Input text: " + input);
         System.out.println("Is it a Palindrome? : " + isPalindrome);
